@@ -1,3 +1,7 @@
+function inputIdChk() {
+	frm.idBtnCheck.value = "idUncheck";
+}
+
 function idCheck(id) {
 	frm.idBtnCheck.value = "idCheck";
 	if(id == "") {
@@ -6,38 +10,33 @@ function idCheck(id) {
 		return;
 	}
 	url = "idCheck.jsp?id=" + id;
-	window.open(url,"IDCheck","width=300, height=150");
+	window.open(url, "IDCheck", "width=300, height=150");
 }
 
 function inputCheck() {
 	if(frm.idBtnCheck.value != "idCheck") {
-		alert("아이디 중복체크가 필요합니다");
+		alert("아이디 중복체크를 해주세요");
 		return;
-	}
-	
+	}	
 	if(frm.pwd.value == "") {
-		alert("비밀번호를 입력하세요");
+		alert("비밀번호를 입력해 주세요");
 		frm.pwd.focus();
 		return;
 	}
-	
 	if(frm.repwd.value == "") {
-		alert("비밀번호를 한번 더 입력하세요");
+		alert("비밀번호를 한번 더 입력해 주세요");
 		frm.repwd.focus();
 		return;
 	}
-	
 	if(frm.pwd.value != frm.repwd.value) {
-		alert("비밀번로가 일치하지 않습니다");
+		alert("비밀번호가 다릅니다");
 		frm.repwd.focus();
 		return;
 	}
-	
 	if(frm.name.value == "") {
 		alert("이름을 입력하세요");
 		frm.name.focus();
 		return;
 	}
-	
 	frm.submit();
 }
