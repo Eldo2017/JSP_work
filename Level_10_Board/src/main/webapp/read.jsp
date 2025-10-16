@@ -17,8 +17,15 @@
 		session.setAttribute("bean", BoardBean);
 	} else {
 		BoardBean = bDao.getBoard(num);
+		session.setAttribute("bean", BoardBean);
 	}
 %>
+
+<script>
+	function list() {
+		document.listFrm.submit();
+	}
+</script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,12 +56,23 @@
 		</tr>
 		<tr>
 			<td colspan="4" align="center"><hr/>
-				[ <a href="">리스트</a> | 
+				[ <a href="list.jsp;">리스트</a> | 
 				<a href="update.jsp?num=<%=num%>&nowPage=<%=nowPage%>">수 정</a> | 
-				<a href="">답 변</a> | 
+				<a href="reply.jsp?nowPage=<%=nowPage%>">답 변</a> | 
 				<a href="delete.jsp?num=<%=num%>&nowPage=<%=nowPage%>"> 삭 제</a> ]
 			</td>
 		</tr>
 	</table>
+	<form action="list.jsp" name="listfrm">
+		<input type="hidden" name="nowPage" value="<%=nowPage %>">
+		<%
+		if(!(keyWord == null || keyWord.equals(""))) {
+		%>
+			<input type="hidden" name="keyField" value="<%=keyField %>">
+			<input type="hidden" name="keyWord" value="<%=keyWord %>">
+		<% 
+		}
+		%>
+	</form>
 </body>
 </html>
