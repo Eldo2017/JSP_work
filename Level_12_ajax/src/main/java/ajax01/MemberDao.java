@@ -1,7 +1,9 @@
 package ajax01;
 
-import java.sql.*;
-import ajax01.DBConnectionMgr;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class MemberDao {
 	private DBConnectionMgr pool = DBConnectionMgr.getInstance();
@@ -75,5 +77,52 @@ public class MemberDao {
 			pool.freeConnection(con);
 		}	
 		return flag;
+	}
+	
+	// id에 해당하는 한 행을 Member bean에 담아 리턴하기
+	public Member getMember(String id) {
+		Member mem = new Member();
+		try {
+			con = pool.getConnection();
+			sql = "select * from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				mem.setId(rs.getString("id"));
+				mem.setName(rs.getString("name"));
+				mem.setGender(rs.getString("gender"));
+				mem.setEmail(rs.getString("email"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con);
+		}
+		return mem;
+	}
+	
+	// 전체 회원 검색
+	public ArrayList<Member> getAllMember() {
+		ArrayList<Member> alist = new ArrayList<>();
+		try {
+			con = pool.getConnection();
+			sql = "select * from member";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Member mem = new Member();
+				mem.setId(rs.getString("id"));
+				mem.setName(rs.getString("name"));
+				mem.setGender(rs.getString("gender"));
+				mem.setEmail(rs.getString("email"));
+				alist.add(mem);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con);
+		}
+		return alist;
 	}
 }
