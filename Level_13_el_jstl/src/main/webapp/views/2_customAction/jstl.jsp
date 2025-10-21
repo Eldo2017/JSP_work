@@ -26,6 +26,6 @@
 	<h4>1. JSTL Core Library</h4>
 	<p>변수와 조건문, 반복문 등 로직과 관련되 문법 제공</p>
 	<a href="01.core.jsp">core library</a>
-	
+	<a href="02.fmt.jsp">fmt library</a>
 </body>
 </html>
