@@ -14,5 +14,7 @@
 	</p>
 	
 	<h3><a href="el.do">01_EL 구문</a></h3>
+	
+	<h3><a href="op.do">02_EL 연산자</a></h3>
 </body>
 </html>
